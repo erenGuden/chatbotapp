@@ -33,7 +33,7 @@ const style = {
 const buttonStyle = {
   fontWeight: "bold",
   padding: "8px 16px",
-  backgroundColor: "blue",
+  // backgroundColor: "blue",
   color: "white",
   border: "none",
   borderRadius: "4px",
@@ -41,6 +41,7 @@ const buttonStyle = {
   bottom: "24px",
   right: "24px",
   position: "inherit",
+  marginLeft: 10,
 };
 
 const modalStyle = {
@@ -67,7 +68,7 @@ const messageStyle = {
 const userMessageStyle = {
   ...messageStyle,
   backgroundColor: "#f2f2f2",
-  color: "black",
+  // color: "black",
 };
 
 const chatgptMessageStyle = {
@@ -83,7 +84,7 @@ const model = env.REACT_APP_API_MODEL;
 function App() {
   const chatBoxRef = useRef(null);
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
 
@@ -177,7 +178,10 @@ function App() {
                 <MinimizeIcon />
               </Button>
             </div>
-            <div ref={chatBoxRef} style={{ flex: "1", overflowY: "auto" }}>
+            <div
+              ref={chatBoxRef}
+              style={{ flex: "1", overflowY: "auto", fontWeight: "normal" }}
+            >
               {chatMessages.map((message, index) => (
                 <div
                   key={index}
@@ -225,13 +229,20 @@ function App() {
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <TextField
+                fullWidth
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type your question here..."
-                sx={{ flex: "1", marginRight: "8px" }}
                 variant="outlined"
+                size="small"
+                autoComplete="off"
               />
-              <Button onClick={handleSendMessage} style={buttonStyle}>
+
+              <Button
+                onClick={handleSendMessage}
+                style={buttonStyle}
+                variant="contained"
+              >
                 Send
               </Button>
             </div>
